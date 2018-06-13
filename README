@@ -1,0 +1,33 @@
+Spiridon Robert 334CB
+
+Proxy HTTP minimal capabil sa intermedieze comunicatia intre un browser web si un server HTTP
+
+	-printdir:
+		-primeste un string care defapt reprezinta calea catre fisier
+		-verifica daca poate accesa aceasta cale
+		-si daca da atunci verifica daca stringul file primit ca parametru
+		-se afla in ultimul director
+
+	-validare_cerere:
+		-extrag primul cuvant din string 
+		-verific daca acest cuvant este o metoda
+		-in caz contrar intorc Bad Request
+
+	-parsare_url:
+		-principiul este ca extrag "cuvant" cu "cuvant" (fiecare subsir despartit de 				spatiu)
+		-verific in care din cazuri ma aflu -GET http://www.exemplu.com/
+						    -GET www.exemplu.com
+						    -GET /cale
+						     Host: www.exemplu.com
+
+		-pe baza fiecarui scenariu extrag hostul, calea si portul daca este prezent
+		-daca portul nu e prezent atunci il initializez ca 80
+
+	- _mkdir:
+		-primesc un string care este defapt calea
+		-creez fiecare director din acea cale pentru a putea deschide fisierul pentru 
+			scriere/citire
+
+
+Primesc ceva din orice sursa pe un anumit port si incep sa folosesc functiile de mai sus pentru a trata comanda primita si a o trimite mai departe la server.Prima data verific daca informatia se afla in cache , daca nu este acolo atunci creez conexiunea cu serverul si trimit comanda neschimbata.Tot ceea ce primesc trimit mai departe catre client si scriu in acelasi timp si in cache. 
+
